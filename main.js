@@ -11,15 +11,12 @@ class Command {
     const [commandName, ...params] = input.split(' ')
 
     this.name = commandName
-
-    this.params = params.map((param) => {
-      const parsedParam = parseInt(param, 10)
-      return Number.isNaN(parsedParam) ? param : parsedParam
-    })
+    this.params = params.map(param => (Number.isNaN(+param) ? param : +param))
   }
 
   run() {
     const { name: commandName, params } = this
+
     switch (commandName) {
       case 'create_hotel':
         const [floor, roomPerFloor] = params
@@ -42,7 +39,7 @@ function main() {
 
   if (inputFile) {
     const commands = getCommandsFromFileName(inputFile)
-    commands.forEach((command) => command.run())
+    commands.forEach(command => command.run())
     rl.close()
   } else {
     runCommandFromCommandLine()
@@ -55,11 +52,11 @@ function getCommandsFromFileName(fileName) {
   return file
     .split('\n')
     .filter(Boolean)
-    .map((input) => new Command(input))
+    .map(input => new Command(input))
 }
 
 function runCommandFromCommandLine() {
-  rl.question('>>> ', (input) => {
+  rl.question('>>> ', input => {
     if (input == 'exit') return rl.close()
     if (input) new Command(input).run()
     runCommandFromCommandLine()
