@@ -54,8 +54,12 @@ Self Check-in & Check-out System
 
 - `npm run start`
 
-  รันโปรแกรมผ่าน โดยรับคำสั่งผ่าน Command Line
+  Run โปรแกรมผ่าน โดยรับคำสั่งผ่าน Command Line
 
 - `npm run start <file.txt>`
 
-  รันโปรแกรมผ่าน โดยรับคำสั่งจาก TXT File
+  Run โปรแกรมผ่าน โดยรับคำสั่งจาก TXT File
+
+- `npm run test`
+
+  Run Test

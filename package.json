@@ -4,7 +4,8 @@
   "description": "Self Check-in & Check-out System",
   "main": "main.js",
   "scripts": {
-    "start": "node main"
+    "start": "node main",
+    "test": "node scripts/test"
   },
   "license": "ISC"
 }
