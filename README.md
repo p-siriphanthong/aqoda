@@ -8,32 +8,50 @@ Self Check-in & Check-out System
 
 และเมื่อแขกต้องการ Check-out จะต้องนำ Keycard มาคืนพร้อมแจ้งชื่อ ให้ตรงกับที่ระบุไว้ใน Keycard ตอน Check-in ถึงจะสามารถ Check-out ได้
 
-โดยพนักงานจะต้องสามารถ
+## Available Commands
 
-1. สร้างโรงแรมโดยกำหนดจำนวนชั้นและจำนวนห้องต่อชั้นได้
-   เลขห้องจะต้องเป็นเลข 3 หลัก ตัวแรกคือเลขชั้น 2 ตัวที่เหลือคือเลขห้อง เริ่มจาก 01
-2. ดูรายการห้องว่างทั้งหมดได้
-3. ดูรายชื่อแขกทั้งหมดได้
-4. ดูรายชื่อแขกโดยกำหนดช่วงอายุได้
-5. ดูชื่อแขกในห้องพักที่ระบุได้
+- `create_hotel <number_of_floor> <number_of_room_per_floor>`
 
-```bash
-$ node main.js
-Hotel created with 2 floor(s), 3 room(s) per floor.
-Room 203 is booked by Thor with keycard number 1.
-Room 101 is booked by PeterParker with keycard number 2.
-Room 102 is booked by StephenStrange with keycard number 3.
-Room 201 is booked by TonyStark with keycard number 4.
-Room 202 is booked by TonyStark with keycard number 5.
-Cannot book room 203 for TonyStark, The room is currently booked by Thor.
-103
-Room 201 is checkout.
-Room 103 is booked by TonyStark with keycard number 4.
-Hotel is fully booked.
-Only Thor can checkout with keycard number 1.
-Room 202 is checkout.
-Room 103 is checkout.
-Thor, PeterParker, StephenStrange
-Thor
-PeterParker
-```
+  สร้างโรงแรม โดยเลขห้องพักจะต้องเป็นเลข 3 หลัก ตัวแรกคือเลขชั้น ส่วน 2 เลขที่เหลือคือเลขห้อง ซึ่งเริ่มจาก 01
+
+- `book <room_number> <guest_name> <guest_age>`
+
+  จองห้องพัก
+
+- `book_by_floor <floor> <guest_name> <guest_age>`
+
+  จองห้องพักทั้งหมดที่อยู่ในชั้นที่ระบุ โดยจะทำการจองได้ก็ต่อเมื่อห้องพักทุกห้องในชั้นนั้นต้องว่างทั้งหมดเท่านั้น
+
+- `checkout <keycard_number> <guest_name>`
+
+  คืนห้องพัก
+
+- `checkout_guest_by_floor <floor>`
+
+  คืนห้องพักในชั้นที่ระบุทั้งหมด
+
+- `get_guest_in_room <room_number>`
+
+  ดูชื่อแขกที่กำลังเข้าพักในห้องพักที่ระบุ
+
+- `list_available_rooms`
+
+  ดูรายการห้องพักที่ว่างทั้งหมด
+
+- `list_guest`
+
+  ดูรายชื่อแขกที่กำลังเข้าพักทั้งหมด
+
+- `list_guest_by_age <operator> <age>`
+
+  ดูรายชื่อแขกที่กำลังเข้าพักทั้งหมดที่มีอายุตามที่ระบุ
+
+- `list_guest_by_floor <floor>`
+
+  ดูรายชื่อแขกที่กำลังเข้าพักทั้งหมดที่พักอยู่ในชั้นที่ระบุ
+
+## Available Scripts
+
+- `node main`
+
+  รันโปรแกรม โดยรับ input จาก [input.txt](input.txt) (ผลลัพธ์ที่ได้ควรตรงกับ [output.txt](output.txt))
