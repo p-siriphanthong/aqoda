@@ -11,7 +11,7 @@ function main() {
   const filename = 'input.txt'
   const commands = getCommandsFromFileName(filename)
 
-  commands.forEach(command => {
+  commands.forEach((command) => {
     switch (command.name) {
       case 'create_hotel':
         const [floor, roomPerFloor] = command.params
@@ -32,12 +32,12 @@ function getCommandsFromFileName(fileName) {
 
   return file
     .split('\n')
-    .map(line => line.split(' '))
+    .map((line) => line.split(' '))
     .map(
       ([commandName, ...params]) =>
         new Command(
           commandName,
-          params.map(param => {
+          params.map((param) => {
             const parsedParam = parseInt(param, 10)
 
             return Number.isNaN(parsedParam) ? param : parsedParam
