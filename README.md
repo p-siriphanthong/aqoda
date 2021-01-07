@@ -2,6 +2,20 @@
 
 Self Check-in & Check-out System
 
+## Available Scripts
+
+- `npm run start`
+
+  Run โปรแกรมผ่าน โดยรับคำสั่งผ่าน Command Line
+
+- `npm run start <file.txt>`
+
+  Run โปรแกรมผ่าน โดยรับคำสั่งจาก TXT File
+
+- `npm run test`
+
+  Run Test
+
 ## Scenario
 
 เมื่อแขกเดินทางมาถึงที่พัก จะต้องแจ้งเลขห้อง ชื่อและอายุ เพื่อทำ Check-in เข้าพัก จากนั้นระบบจะออก Keycard ให้แขกเพื่อใช้ในการเปิดประตูห้องพัก
@@ -49,17 +63,3 @@ Self Check-in & Check-out System
 - `list_guest_by_floor <floor>`
 
   ดูรายชื่อแขกที่กำลังเข้าพักทั้งหมดที่พักอยู่ในชั้นที่ระบุ
-
-## Available Scripts
-
-- `npm run start`
-
-  Run โปรแกรมผ่าน โดยรับคำสั่งผ่าน Command Line
-
-- `npm run start <file.txt>`
-
-  Run โปรแกรมผ่าน โดยรับคำสั่งจาก TXT File
-
-- `npm run test`
-
-  Run Test
