@@ -52,6 +52,10 @@ Self Check-in & Check-out System
 
 ## Available Scripts
 
-- `node main`
+- `npm run start`
 
-  รันโปรแกรม โดยรับ input จาก [input.txt](input.txt) (ผลลัพธ์ที่ได้ควรตรงกับ [output.txt](output.txt))
+  รันโปรแกรมผ่าน โดยรับคำสั่งผ่าน Command Line
+
+- `npm run start <file.txt>`
+
+  รันโปรแกรมผ่าน โดยรับคำสั่งจาก TXT File

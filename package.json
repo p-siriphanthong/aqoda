@@ -1,0 +1,10 @@
+{
+  "name": "aqoda",
+  "version": "1.0.0",
+  "description": "Self Check-in & Check-out System",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main"
+  },
+  "license": "ISC"
+}
