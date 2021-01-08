@@ -29,11 +29,27 @@ class Hotel {
   }
 
   findRoom(roomNumber) {
-    return this.rooms.find(room => room.roomNumber === roomNumber)
+    const room = this.rooms.find(room => room.roomNumber === roomNumber)
+    if (room) return room
+    throw new Error(`Cannot find room ${roomNumber}`)
+  }
+
+  getBookingByRoom(room) {
+    const booking = this.bookings.find(booking => booking.room === room)
+    if (booking) return booking
+    throw new Error(`Cannot find booking of room ${room.roomNumber}`)
   }
 
   bookRoom(roomNumber, guestName, guestAge) {
     const room = this.findRoom(roomNumber)
+
+    if (!room.isAvailable) {
+      const booking = this.getBookingByRoom(room)
+      console.log(
+        `Cannot book room ${room.roomNumber} for ${guestName}, The room is currently booked by ${booking.guest.name}.`
+      )
+      return
+    }
 
     const keycard = this.availableKeycard
     const booking = new Booking({
