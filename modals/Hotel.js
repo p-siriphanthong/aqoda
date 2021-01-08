@@ -58,6 +58,10 @@ class Hotel {
     throw new Error(`Cannot find booking by keycard ${keycard.keycardNumber}`)
   }
 
+  getBookingsByRoomFloor(floor) {
+    return this.bookings.filter(booking => booking.room.floor === floor)
+  }
+
   bookRoom(roomNumber, guestName, guestAge) {
     const room = this.getRoom(roomNumber)
 
@@ -132,6 +136,16 @@ class Hotel {
       console.log(guests.map(guest => guest.name).join(', '))
     } else {
       console.log(`No any guest who age ${operator} ${age}.`)
+    }
+  }
+
+  listGuestByFloor(floor) {
+    const bookings = this.getBookingsByRoomFloor(floor)
+
+    if (bookings.length) {
+      console.log(bookings.map(booking => booking.guest.name).join(', '))
+    } else {
+      console.log(`No any guest who book room on floor ${floor}.`)
     }
   }
 }

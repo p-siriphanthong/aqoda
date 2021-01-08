@@ -57,6 +57,11 @@ class Command {
           hotel.listGuestByAge(operator, age)
           return
 
+        case 'list_guest_by_floor':
+          var [floor] = params
+          hotel.listGuestByFloor(floor)
+          return
+
         default:
           console.log(`'${commandName}' is not a aqoda command (see README).`)
           return
