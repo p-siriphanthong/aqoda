@@ -28,6 +28,10 @@ class Hotel {
     return this.availableKeycards[0]
   }
 
+  get guests() {
+    return this.bookings.map(booking => booking.guest)
+  }
+
   getRoom(roomNumber) {
     const room = this.rooms.find(room => room.roomNumber === roomNumber)
     if (room) return room
@@ -103,6 +107,14 @@ class Hotel {
       console.log(this.availableRooms.map(room => room.roomNumber).join(', '))
     } else {
       console.log('Hotel is fully booked.')
+    }
+  }
+
+  listGuest() {
+    if (this.guests.length) {
+      console.log(this.guests.map(guest => guest.name).join(', '))
+    } else {
+      console.log('No any guest.')
     }
   }
 }
