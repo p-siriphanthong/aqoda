@@ -89,7 +89,7 @@ class Hotel {
     )
   }
 
-  checkOutRoom(keycardNumber, guestName) {
+  checkOutRoom(keycardNumber, guestName, silent = false) {
     const keycard = this.getKeycard(keycardNumber)
     const booking = this.getBookingByKeycard(keycard)
 
@@ -103,7 +103,23 @@ class Hotel {
     booking.checkOut()
     this.bookings = this.bookings.filter(({ room }) => room !== booking.room)
 
-    console.log(`Room ${booking.room.roomNumber} is checkout.`)
+    !silent && console.log(`Room ${booking.room.roomNumber} is checkout.`)
+  }
+
+  checkOutRoomByFloor(floor) {
+    const bookings = this.getBookingsByRoomFloor(floor)
+    const bookingRoomNumbers = bookings.map(booking => booking.room.roomNumber)
+
+    if (!bookings.length) {
+      console.log(`No any booking on floor ${floor}`)
+      return
+    }
+
+    bookings.forEach(booking => {
+      this.checkOutRoom(booking.keycard.keycardNumber, booking.guest.name, true)
+    })
+
+    console.log(`Room ${bookingRoomNumbers.join(', ')} are checkout.`)
   }
 
   getGuestInRoom(roomNumber) {
