@@ -66,6 +66,14 @@ class Hotel {
       `Room ${room.roomNumber} is booked by ${guestName} with keycard number ${keycard.keycardNumber}.`
     )
   }
+
+  listAvailableRooms() {
+    if (this.availableRooms.length) {
+      console.log(this.availableRooms.map(room => room.roomNumber).join(', '))
+    } else {
+      console.log('Hotel is fully booked.')
+    }
+  }
 }
 
 function generateHotelRooms(numberOfFloor, numberOfRoomPerFloor) {

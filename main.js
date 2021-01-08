@@ -34,6 +34,10 @@ class Command {
           hotel.bookRoom(roomNumber, guestName, guestAge)
           return
 
+        case 'list_available_rooms':
+          hotel.listAvailableRooms()
+          return
+
         default:
           console.log(`'${commandName}' is not a aqoda command (see README).`)
           return
