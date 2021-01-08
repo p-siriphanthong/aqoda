@@ -38,6 +38,10 @@ class Hotel {
     throw new Error(`Cannot find room ${roomNumber}`)
   }
 
+  getRoomsOnFloor(floor) {
+    return this.rooms.filter(room => room.floor === floor)
+  }
+
   getKeycard(keycardNumber) {
     const keycard = this.keycards.find(
       keycard => keycard.keycardNumber === keycardNumber
@@ -62,7 +66,7 @@ class Hotel {
     return this.bookings.filter(booking => booking.room.floor === floor)
   }
 
-  bookRoom(roomNumber, guestName, guestAge) {
+  bookRoom(roomNumber, guestName, guestAge, silent = false) {
     const room = this.getRoom(roomNumber)
 
     if (!room.isAvailable) {
@@ -84,8 +88,33 @@ class Hotel {
     booking.checkIn()
     this.bookings.push(booking)
 
+    !silent &&
+      console.log(
+        `Room ${room.roomNumber} is booked by ${guestName} with keycard number ${keycard.keycardNumber}.`
+      )
+
+    return booking
+  }
+
+  bookAllRoomsOnFloor(floor, guestName, guestAge) {
+    const rooms = this.getRoomsOnFloor(floor)
+    const roomNumbers = rooms.map(room => room.roomNumber)
+    const keycardNumbers = []
+
+    if (rooms.some(room => !room.isAvailable)) {
+      console.log(`Cannot book floor ${floor} for ${guestName}.`)
+      return
+    }
+
+    rooms.forEach(room => {
+      const booking = this.bookRoom(room.roomNumber, guestName, guestAge, true)
+      keycardNumbers.push(booking.keycard.keycardNumber)
+    })
+
     console.log(
-      `Room ${room.roomNumber} is booked by ${guestName} with keycard number ${keycard.keycardNumber}.`
+      `Room ${roomNumbers.join(
+        ', '
+      )} are booked with keycard number ${keycardNumbers.join(', ')}`
     )
   }
 
@@ -108,7 +137,7 @@ class Hotel {
 
   checkOutRoomByFloor(floor) {
     const bookings = this.getBookingsByRoomFloor(floor)
-    const bookingRoomNumbers = bookings.map(booking => booking.room.roomNumber)
+    const roomNumbers = bookings.map(booking => booking.room.roomNumber)
 
     if (!bookings.length) {
       console.log(`No any booking on floor ${floor}`)
@@ -119,7 +148,7 @@ class Hotel {
       this.checkOutRoom(booking.keycard.keycardNumber, booking.guest.name, true)
     })
 
-    console.log(`Room ${bookingRoomNumbers.join(', ')} are checkout.`)
+    console.log(`Room ${roomNumbers.join(', ')} are checkout.`)
   }
 
   getGuestInRoom(roomNumber) {

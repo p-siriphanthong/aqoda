@@ -34,6 +34,11 @@ class Command {
           hotel.bookRoom(roomNumber, guestName, guestAge)
           return
 
+        case 'book_by_floor':
+          var [floor, guestName, guestAge] = params
+          hotel.bookAllRoomsOnFloor(floor, guestName, guestAge)
+          return
+
         case 'checkout':
           var [keycardNumber, guestName] = params
           hotel.checkOutRoom(keycardNumber, guestName)
