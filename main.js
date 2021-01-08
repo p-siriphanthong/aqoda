@@ -27,6 +27,11 @@ class Command {
         hotel = new Hotel({ numberOfFloor, numberOfRoomPerFloor })
         return
 
+      case 'book':
+        const [roomNumber, guestName, guestAge] = params
+        hotel.bookRoom(roomNumber, guestName, guestAge)
+        return
+
       default:
         console.log(`'${commandName}' is not a aqoda command (see README).`)
         return
