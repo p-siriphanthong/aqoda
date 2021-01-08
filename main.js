@@ -1,10 +1,14 @@
 const fs = require('fs')
 const readline = require('readline')
 
+const { Hotel } = require('./modals/Hotel')
+
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 })
+
+let hotel = null
 
 class Command {
   constructor(input) {
@@ -19,12 +23,8 @@ class Command {
 
     switch (commandName) {
       case 'create_hotel':
-        const [floor, roomPerFloor] = params
-        const hotel = { floor, roomPerFloor }
-
-        console.log(
-          `Hotel created with ${floor} floor(s), ${roomPerFloor} room(s) per floor.`
-        )
+        const [numberOfFloor, numberOfRoomPerFloor] = params
+        hotel = new Hotel({ numberOfFloor, numberOfRoomPerFloor })
         return
 
       default:
