@@ -102,6 +102,12 @@ class Hotel {
     console.log(`Room ${booking.room.roomNumber} is checkout.`)
   }
 
+  getGuestInRoom(roomNumber) {
+    const room = this.getRoom(roomNumber)
+    const booking = this.getBookingByRoom(room)
+    console.log(booking.guest.name)
+  }
+
   listAvailableRooms() {
     if (this.availableRooms.length) {
       console.log(this.availableRooms.map(room => room.roomNumber).join(', '))

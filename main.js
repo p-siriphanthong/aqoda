@@ -39,6 +39,11 @@ class Command {
           hotel.checkOutRoom(keycardNumber, guestName)
           return
 
+        case 'get_guest_in_room':
+          var [roomNumber] = params
+          hotel.getGuestInRoom(roomNumber)
+          return
+
         case 'list_available_rooms':
           hotel.listAvailableRooms()
           return
