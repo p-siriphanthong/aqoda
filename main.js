@@ -25,13 +25,18 @@ class Command {
     try {
       switch (commandName) {
         case 'create_hotel':
-          const [numberOfFloor, numberOfRoomPerFloor] = params
+          var [numberOfFloor, numberOfRoomPerFloor] = params
           hotel = new Hotel({ numberOfFloor, numberOfRoomPerFloor })
           return
 
         case 'book':
-          const [roomNumber, guestName, guestAge] = params
+          var [roomNumber, guestName, guestAge] = params
           hotel.bookRoom(roomNumber, guestName, guestAge)
+          return
+
+        case 'checkout':
+          var [keycardNumber, guestName] = params
+          hotel.checkOutRoom(keycardNumber, guestName)
           return
 
         case 'list_available_rooms':

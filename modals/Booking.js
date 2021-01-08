@@ -11,6 +11,11 @@ class Booking {
     this.room.takeOut()
     this.keycard.takeOut()
   }
+
+  checkOut() {
+    this.room.takeBack()
+    this.keycard.takeBack()
+  }
 }
 
 module.exports = { Booking }

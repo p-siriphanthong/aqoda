@@ -28,10 +28,18 @@ class Hotel {
     return this.availableKeycards[0]
   }
 
-  findRoom(roomNumber) {
+  getRoom(roomNumber) {
     const room = this.rooms.find(room => room.roomNumber === roomNumber)
     if (room) return room
     throw new Error(`Cannot find room ${roomNumber}`)
+  }
+
+  getKeycard(keycardNumber) {
+    const keycard = this.keycards.find(
+      keycard => keycard.keycardNumber === keycardNumber
+    )
+    if (keycard) return keycard
+    throw new Error(`Cannot find keycard ${keycardNumber}`)
   }
 
   getBookingByRoom(room) {
@@ -40,8 +48,14 @@ class Hotel {
     throw new Error(`Cannot find booking of room ${room.roomNumber}`)
   }
 
+  getBookingByKeycard(keycard) {
+    const booking = this.bookings.find(booking => booking.keycard === keycard)
+    if (booking) return booking
+    throw new Error(`Cannot find booking by keycard ${keycard.keycardNumber}`)
+  }
+
   bookRoom(roomNumber, guestName, guestAge) {
-    const room = this.findRoom(roomNumber)
+    const room = this.getRoom(roomNumber)
 
     if (!room.isAvailable) {
       const booking = this.getBookingByRoom(room)
@@ -65,6 +79,23 @@ class Hotel {
     console.log(
       `Room ${room.roomNumber} is booked by ${guestName} with keycard number ${keycard.keycardNumber}.`
     )
+  }
+
+  checkOutRoom(keycardNumber, guestName) {
+    const keycard = this.getKeycard(keycardNumber)
+    const booking = this.getBookingByKeycard(keycard)
+
+    if (booking.guest.name !== guestName) {
+      console.log(
+        `Only ${booking.guest.name} can checkout with keycard number ${keycardNumber}.`
+      )
+      return
+    }
+
+    booking.checkOut()
+    this.bookings = this.bookings.filter(({ room }) => room !== booking.room)
+
+    console.log(`Room ${booking.room.roomNumber} is checkout.`)
   }
 
   listAvailableRooms() {
