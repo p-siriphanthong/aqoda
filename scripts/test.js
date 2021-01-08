@@ -48,10 +48,12 @@ exec(`npm run --silent start ${inputFile}`, (error, stdout) => {
     }
   })
 
+  const { failed, passed } = testResult
+  const total = failed + passed
   console.log(
-    `\nTests: ${color(`${testResult.failed} failed`, 'danger')}, ${color(
-      `${testResult.passed} passed`,
-      'success'
-    )}, ${testResult.passed + testResult.failed} total\n`
+    `\nTests: ${color(
+      `${failed} failed`,
+      failed ? 'danger' : 'success'
+    )}, ${color(`${passed} passed`, 'success')}, ${total} total\n`
   )
 })
