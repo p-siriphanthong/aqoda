@@ -123,6 +123,17 @@ class Hotel {
       console.log('No any guest.')
     }
   }
+
+  listGuestByAge(operator, age) {
+    const guests = this.guests.filter(guest =>
+      eval(`${guest.age} ${operator} ${age}`)
+    )
+    if (guests.length) {
+      console.log(guests.map(guest => guest.name).join(', '))
+    } else {
+      console.log(`No any guest who age ${operator} ${age}.`)
+    }
+  }
 }
 
 function generateHotelRooms(numberOfFloor, numberOfRoomPerFloor) {
