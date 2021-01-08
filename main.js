@@ -1,6 +1,7 @@
 const fs = require('fs')
 const readline = require('readline')
 
+const { cliColor } = require('./utils')
 const { Hotel } = require('./modals/Hotel')
 
 const rl = readline.createInterface({
@@ -21,20 +22,24 @@ class Command {
   run() {
     const { name: commandName, params } = this
 
-    switch (commandName) {
-      case 'create_hotel':
-        const [numberOfFloor, numberOfRoomPerFloor] = params
-        hotel = new Hotel({ numberOfFloor, numberOfRoomPerFloor })
-        return
+    try {
+      switch (commandName) {
+        case 'create_hotel':
+          const [numberOfFloor, numberOfRoomPerFloor] = params
+          hotel = new Hotel({ numberOfFloor, numberOfRoomPerFloor })
+          return
 
-      case 'book':
-        const [roomNumber, guestName, guestAge] = params
-        hotel.bookRoom(roomNumber, guestName, guestAge)
-        return
+        case 'book':
+          const [roomNumber, guestName, guestAge] = params
+          hotel.bookRoom(roomNumber, guestName, guestAge)
+          return
 
-      default:
-        console.log(`'${commandName}' is not a aqoda command (see README).`)
-        return
+        default:
+          console.log(`'${commandName}' is not a aqoda command (see README).`)
+          return
+      }
+    } catch (error) {
+      console.log(cliColor('ERROR!', 'danger'), error.message)
     }
   }
 }

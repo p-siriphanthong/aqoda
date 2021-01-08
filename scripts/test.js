@@ -2,29 +2,14 @@ const fs = require('fs')
 const path = require('path')
 const { exec } = require('child_process')
 
+const { cliColor } = require('../utils')
+
 const inputFile = path.resolve('example/input.txt')
 const outputFile = path.resolve('example/output.txt')
 
-const styles = {
-  reset: '\x1b[0m',
-  fg: {
-    danger: '\x1b[31m',
-    success: '\x1b[32m',
-  },
-  bg: {
-    danger: '\x1b[30m\x1b[41m',
-    success: '\x1b[30m\x1b[42m',
-  },
-}
-
-function color(string, modifier, isBackground = false) {
-  const type = isBackground ? 'bg' : 'fg'
-  return styles[type][modifier] + string + styles.reset
-}
-
 exec(`npm run --silent start ${inputFile}`, (error, stdout) => {
   if (error) {
-    console.log(error.message)
+    console.log(cliColor('ERROR!', 'danger'), error.message)
     return
   }
 
@@ -38,12 +23,12 @@ exec(`npm run --silent start ${inputFile}`, (error, stdout) => {
     if (!command) return
 
     if (output[index] === result[index]) {
-      console.log(color(' PASS ', 'success', true), command)
+      console.log(cliColor(' PASS ', 'success', true), command)
       testResult.passed += 1
     } else {
-      console.log(color(' FAIL ', 'danger', true), command)
-      console.log('  ', color('Expected:', 'success'), output[index])
-      console.log('  ', color('Received:', 'danger'), result[index])
+      console.log(cliColor(' FAIL ', 'danger', true), command)
+      console.log('  ', cliColor('Expected:', 'success'), output[index])
+      console.log('  ', cliColor('Received:', 'danger'), result[index])
       testResult.failed += 1
     }
   })
@@ -51,9 +36,9 @@ exec(`npm run --silent start ${inputFile}`, (error, stdout) => {
   const { failed, passed } = testResult
   const total = failed + passed
   console.log(
-    `\nTests: ${color(
+    `\nTests: ${cliColor(
       `${failed} failed`,
       failed ? 'danger' : 'success'
-    )}, ${color(`${passed} passed`, 'success')}, ${total} total\n`
+    )}, ${cliColor(`${passed} passed`, 'success')}, ${total} total\n`
   )
 })
