@@ -2,7 +2,7 @@ const fs = require('fs')
 const readline = require('readline')
 
 const { cliColor } = require('./utils')
-const { Hotel } = require('./modals/Hotel')
+const { Hotel } = require('./models/Hotel')
 
 const rl = readline.createInterface({
   input: process.stdin,
